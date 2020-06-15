@@ -39,8 +39,8 @@ function preload() {
 function setup() {
     cursor(HAND, 16, 16);
     if(firstSetup) {
-        writeText();
         createCanvas(401, 401);
+        writeText();
     }
 
     cols = floor(width / w);
