@@ -1,0 +1,17 @@
+body {
+  background-color: rgb(206, 242, 184);
+  color: black;
+  font-family: /*"Arial"*/
+  "Candara", "Calibri", Arial, sans-serif;
+  font-size: 15;
+  font-weight: normal;
+}
+
+strong {
+  color: rgb(30, 60, 31);
+  font-weight: 700;
+}
+
+p {
+    margin: 10px auto;
+}
