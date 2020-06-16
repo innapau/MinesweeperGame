@@ -17,9 +17,7 @@ Cell.prototype.show = function() {
 
     if (this.revealed) {
         if (this.mine) {
-
-            console.log('mine')
-            // image(images.mine, this.x, this. y, this.w, this.w);
+            image(images.mine, this.x, this. y, this.w, this.w);
         } else {
             fill(255);
             rect(this.x, this.y, this.w, this.w);
@@ -32,8 +30,7 @@ Cell.prototype.show = function() {
             }
         }
     } else if (this.marked) {
-        console.log('marked')
-		// image(images.flag, this.x, this.y, this.w, this.w);
+		image(images.flag, this.x, this.y, this.w, this.w);
     }
 }
 

@@ -32,10 +32,10 @@ var sizeSlider;
 var difSlider;
 
 
-// function preload() {
-//   images.mine = loadImage("./img/mine.png");
-//   images.flag = loadImage("./img/flag.png");
-// };
+function preload() {
+  images.mine = loadImage("./img/mine.png");
+  images.flag = loadImage("./img/flag.png");
+};
 
 function setup() {
     cursor(HAND, 16, 16);
