@@ -16,7 +16,8 @@ var won = false;
 let grid;
 let cols;
 let rows;
-let w = 40; // w - width  - ширина одной ячейки
+let canvasSize = 401;
+let w = 20; // w - width  - ширина одной ячейки
 
 let totalMines = 10;
 
@@ -31,10 +32,10 @@ var sizeSlider;
 var difSlider;
 
 
-function preload() {
-  images.mine = loadImage("./img/mine.png");
-  images.flag = loadImage("./img/flag.png");
-};
+// function preload() {
+//   images.mine = loadImage("./img/mine.png");
+//   images.flag = loadImage("./img/flag.png");
+// };
 
 function setup() {
     cursor(HAND, 16, 16);
@@ -82,10 +83,15 @@ function setup() {
 
 function resetup() {
   firstSetup = false;
-  w = width / sizeSlider.value();
   totalMines = difSlider.value();
-	loop();
-    setup();
+  if (sizeSlider.value() >= 20) {
+      resizeCanvas(w * sizeSlider.value() + 1, w * sizeSlider.value() + 1);
+      loop();
+      setup();
+  } else {
+      loop();
+      setup();
+  }
 };
 
 let firstMousePress = true;
@@ -165,7 +171,6 @@ function draw() {
         text("GAME OVER", width / 2, height / 2);
     } else if (won) {
         background(115, 201, 107, 230);
-
         stroke(50, 175, 37);
         fill(50, 175, 37);
         textSize(40);
@@ -217,7 +222,6 @@ function win() {
       grid[i][j].revealed = true;
     }
   }
-
   console.log("Ура, Вы победили!");
   won = true;
 };
