@@ -12,13 +12,11 @@ function Cell(i, j, w) {
 
 Cell.prototype.show = function() {
     stroke(0);
-    fill(160);
+    fill(0, 234, 163);
     rect(this.x, this.y, this.w, this.w);
 
     if (this.revealed) {
         if (this.mine) {
-            // fill(127);
-            // ellipse(this.x + this.w * 0.5, this.y + this.w * 0.5, this.w * 0.5);
             image(images.mine, this.x, this. y, this.w, this.w);
         } else {
             fill(255);

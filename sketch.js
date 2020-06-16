@@ -16,7 +16,7 @@ var won = false;
 let grid;
 let cols;
 let rows;
-let w = 20; // w - width  - ширина одной ячейки
+let w = 40; // w - width  - ширина одной ячейки
 
 let totalMines = 55;
 
@@ -32,8 +32,8 @@ var difSlider;
 
 
 function preload() {
-  images.mine = loadImage("img/mine.png");
-  images.flag = loadImage("img/flag.png");
+  images.mine = loadImage("./img/mine.png");
+  images.flag = loadImage("./img/flag.png");
 };
 
 function setup() {
@@ -91,16 +91,14 @@ function resetup() {
 let firstMousePress = true;
 
 function mousePressed() {
-    background(255);
     for (let i = 0; i < cols; i++) {
         for (let j = 0; j < rows; j++) {
             if(grid[i][j].contains(mouseX, mouseY) && !grid[i][j].marked) {
                 grid[i][j].reveal();
+
                 if (grid[i][j].mine) {
                     if (firstMousePress) {
                         grid[i][j].mine = false;
-
-                        // Выбираем мину на замену
                         let newMine = undefined;
                         while (!newMine) {
                             let c = random(cols);
@@ -108,7 +106,7 @@ function mousePressed() {
 
                             if (!grid[c][r].mine) {
                                 grid[c][r].mine = true;
-                                newBee = grid[c][r];
+                                newMine = grid[c][r];
                             }
                         }
                     } else {
@@ -122,8 +120,8 @@ function mousePressed() {
     firstMousePress = false;
 };
 
-function keyReleased() {
-  if (key === 'z' || key === 'Z') {
+function keyPressed() {
+  if (keyCode === SHIFT) {
     for (let i = 0; i < cols; i++) {
       for (let j = 0; j < rows; j++) {
         if (grid[i][j].contains(mouseX, mouseY)) {
@@ -149,6 +147,8 @@ function draw() {
             }
         }
     }
+
+    //true только если все скрытые ячейки - мины
     if (totalRevealed + totalMines >= cols * rows && !endGame) {
        noLoop();
        win();
@@ -171,9 +171,35 @@ function draw() {
         textSize(40);
         textAlign(CENTER);
         textFont("Trebuchet MS");
-        text("YOU WIN", width / 2, height / 2);
+        text("VICTORY", width / 2, height / 2);
     }
 };
+
+//.  Описание игры а так же управление игрой под холстом
+function writeText() {
+    let descr = createDiv('').size(width * 2, 170);
+    descr.html("<p>Игра 'Сапер'. Целью игры является открытие всех ячеек, не содержащих мины. Чтобы открыть ячейку, <strong>кликните по ней</strong>. Числа в ячейке говорят  о том, сколько всего мин находится в восьми соседних ячейках, окружающих нажатую Вами ячейку (Пустая ячейка означает, что рядом нет мин).</p> <p>Игра автоматически откроет все ячейки, рядом с пустой ячейкой. Вы можете отмечать 'флажком' ячейки, в которых по Вашему внению находятся мины. Отмечать можно с помощью клавишы <strong>Z</strong>.</p>");
+
+    // createSlider(минимальное значение, масксимальное значение, значение по умолчанию, шаг)
+    createElement("h4", "Новая игра");
+    createP("Размер поля:");
+    sizeSlider = createSlider(5, 40, 10, 1);
+    let sizeValue = createSpan('');
+    sizeValue.html(sizeSlider.value());
+
+    createP("Сложность (% мин на поле):");
+    difSlider = createSlider(1, 100, 15, 1);
+    let difValue = createSpan('');
+    difValue.html(difSlider.value());
+
+    addEventListener('input', function (e) {
+        let element = e.target;
+        element.nextSibling.innerHTML = element.value;
+    })
+
+    let reDrawer = createButton("Создать поле");
+    reDrawer.mousePressed(resetup);
+}
 
 function gameOver() {
     for (let i = 0; i < cols; i++) {
@@ -181,7 +207,6 @@ function gameOver() {
             grid[i][j].revealed = true;
         }
     }
-    // Текст оконч
     console.log("Игра окончена!");
     endGame = true;
 };
@@ -196,17 +221,3 @@ function win() {
   console.log("Ура, Вы победили!");
   won = true;
 };
-
-//.  Описание игры а так же управление игрой под холстом
-function writeText() {
-  let descr = createDiv('').size(width * 2, 170);
-  descr.html("<p>Игра 'Сапер'. Целью игры является открытие всех ячеек, не содержащих мины. Чтобы открыть ячейку, <strong>кликните по ней</strong>. Числа в ячейке говорят  о том, сколько всего мин находится в восьми соседних ячейках, окружающих нажатую Вами ячейку (Пустая ячейка означает, что рядом нет мин).</p> <p>Игра автоматически откроет все ячейки, рядом с пустой ячейкой. Вы можете отмечать 'флажком' ячейки, в которых по Вашему внению находятся мины. Отмечать можно с помощью клавишы <strong>Z</strong>.</p><h4>Новая игра</h4><p>Размер поля:</p>");
-
-  // createSlider(минимальное значение, масксимальное значение, значение по умолчанию, шаг)
-  sizeSlider = createSlider(5, 30, 10, 1);
-  createP("Сложность (% мин на поле):");
-  difSlider = createSlider(1, 100, 15, 1);
-
-  let redrawer = createButton("Создать поле");
-  redrawer.mousePressed(resetup);
-}

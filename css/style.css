@@ -1,15 +1,13 @@
 body {
-  background-color: rgb(206, 242, 184);
-  color: black;
-  font-family: /*"Arial"*/
-  "Candara", "Calibri", Arial, sans-serif;
-  font-size: 15;
-  font-weight: normal;
-}
-
-strong {
-  color: rgb(30, 60, 31);
-  font-weight: 700;
+    background: rgb(34,193,195);
+    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+    color: black;
+    font-family: /
+    "Candara", "Calibri", Arial, sans-serif;
+    font-size: 15;
+    font-weight: normal;
+    max-width: 800px;
+    margin: 20px auto;
 }
 
 p {
