@@ -183,7 +183,7 @@ function writeText() {
     // createSlider(минимальное значение, масксимальное значение, значение по умолчанию, шаг)
     createElement("h4", "Новая игра");
     createP("Размер поля:");
-    sizeSlider = createSlider(5, 40, 10, 1);
+    sizeSlider = createSlider(5, 40, 20, 1);
     let sizeValue = createSpan('');
     sizeValue.html(sizeSlider.value());
 
