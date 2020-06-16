@@ -84,14 +84,9 @@ function setup() {
 function resetup() {
   firstSetup = false;
   totalMines = difSlider.value();
-  if (sizeSlider.value() >= 20) {
-      resizeCanvas(w * sizeSlider.value() + 1, w * sizeSlider.value() + 1);
-      loop();
-      setup();
-  } else {
-      loop();
-      setup();
-  }
+  resizeCanvas(w * sizeSlider.value() + 1, w * sizeSlider.value() + 1);
+  loop();
+  setup();
 };
 
 let firstMousePress = true;
