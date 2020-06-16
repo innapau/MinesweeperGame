@@ -188,7 +188,7 @@ function writeText() {
     sizeValue.html(sizeSlider.value());
 
     createP("Сложность (% мин на поле):");
-    difSlider = createSlider(1, 100, 15, 1);
+    difSlider = createSlider(1, 100, 10, 1);
     let difValue = createSpan('');
     difValue.html(difSlider.value());
 
