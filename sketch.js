@@ -18,7 +18,7 @@ let cols;
 let rows;
 let w = 40; // w - width  - ширина одной ячейки
 
-let totalMines = 55;
+let totalMines = 10;
 
 //  Подгружаемые файлы
 let images = {
